@@ -6,6 +6,8 @@ import Details from './src/app/screens/Details';
 import { User, onAuthStateChanged } from 'firebase/auth';
 import { useEffect, useState } from 'react';
 import { FIREBASE_AUTH } from './src/app/Config/FirebaseConfig';
+import SignUp from './src/app/screens/SignUp';
+import BMICalculatorScreen from './src/app/screens/BMICalculatorScreen';
 
 const StackActions = createNativeStackNavigator();
 
@@ -16,6 +18,7 @@ function InsideLayout () {
     <InsideStack.Navigator initialRouteName="Login">
       <InsideStack.Screen name="My meals" component={List} />
       <InsideStack.Screen name="Details" component={Details} />
+      <InsideStack.Screen name="BMI Calculator" component={BMICalculatorScreen} /> 
     </InsideStack.Navigator>
   )
 }
@@ -59,15 +62,9 @@ export default function App() {
           options={{ headerShown : false }} 
           />
         )}
-
+        <StackActions.Screen name="SignUp" component={SignUp} />
       </StackActions.Navigator>
     </NavigationContainer>
-
-
-    //DRUGA WERSJA
-
-
-
   );
 }
 

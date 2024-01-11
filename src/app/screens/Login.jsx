@@ -3,13 +3,15 @@ import React, { useState } from 'react';
 import { FIREBASE_AUTH } from '../Config/FirebaseConfig';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { useNavigation } from '@react-navigation/native';
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
     const auth = FIREBASE_AUTH;
-    
+    const navigation = useNavigation();
+
     const signIn = async () => {
         setLoading(true);
         try {
@@ -24,19 +26,19 @@ const Login = () => {
         }
     };
 
-    const signUp = async () => {
-        setLoading(true);
-        try {
-            const response = await createUserWithEmailAndPassword(auth, email, password);
-            console.log(response);
-            alert('Check your emails!');
-        } catch(error) {
-            console.log(error);
-            alert('Sign in failed: ' + error.message);
-        } finally {
-            setLoading(false);
-        }
-    };
+    // const signUp = async () => {
+    //     setLoading(true);
+    //     try {
+    //         const response = await createUserWithEmailAndPassword(auth, email, password);
+    //         console.log(response);
+    //         alert('Check your emails!');
+    //     } catch(error) {
+    //         console.log(error);
+    //         alert('Sign in failed: ' + error.message);
+    //     } finally {
+    //         setLoading(false);
+    //     }
+    // };
 
     
     return (
@@ -66,7 +68,7 @@ const Login = () => {
                     <Button title='Login' onPress={signIn} />
                 </View>
                 <View style={styles.button}>
-                    <Button title='Create account' onPress={signUp} style={styles.button} />
+                    <Button title='Register' onPress={() => navigation.navigate('SignUp')} style={styles.button} />
                 </View>
                 </>}
             </KeyboardAvoidingView>
