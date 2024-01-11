@@ -13,7 +13,7 @@ const InsideStack = createNativeStackNavigator();
 
 function InsideLayout () {
   return (
-    <InsideStack.Navigator initialRouteName="Home">
+    <InsideStack.Navigator initialRouteName="Login">
       <InsideStack.Screen name="My meals" component={List} />
       <InsideStack.Screen name="Details" component={Details} />
     </InsideStack.Navigator>
@@ -24,21 +24,50 @@ export default function App() {
   
   const [user, setUser] = useState(null);
 
+  // useEffect(() => {
+  //   onAuthStateChanged(FIREBASE_AUTH, (user) => {
+  //     console.log(user);
+  //     setUser(user);
+  //   });
+  // }, []);
+
   useEffect(() => {
-    onAuthStateChanged(FIREBASE_AUTH, (user) => {
-      console.log(user);
-      setUser(user);
+    const unsubscribe = onAuthStateChanged(FIREBASE_AUTH, (user) => {
+        console.log(user);
+        setUser(user);
     });
-  }, []);
+
+    // Oczyszczanie subskrypcji
+    return () => unsubscribe();
+}, []);
+
   
 
   return (
-  
     <NavigationContainer>
       <StackActions.Navigator initialRouteName="Login">
-        <StackActions.Screen name="Login" component={Login} options={{ headerShown : false }} />
+        {user ? (
+          <StackActions.Screen 
+          name="Inside" 
+          component={InsideLayout} 
+          options={{ headerShown : false }} 
+          />
+        ) : (
+          <StackActions.Screen 
+          name="Login" 
+          component={Login} 
+          options={{ headerShown : false }} 
+          />
+        )}
+
       </StackActions.Navigator>
     </NavigationContainer>
+
+
+    //DRUGA WERSJA
+
+
+
   );
 }
 
