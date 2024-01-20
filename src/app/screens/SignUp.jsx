@@ -5,18 +5,22 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { FIREBASE_AUTH } from '../Config/FirebaseConfig';
 import { useNavigation } from '@react-navigation/native';
 
+
 const SignUp = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
     const navigation = useNavigation();
+    
 
     const handleSignUp = async () => {
         setLoading(true);
         try {
             await createUserWithEmailAndPassword(FIREBASE_AUTH, email, password);
             Alert.alert("Success", "Account created successfully");
-            navigation.navigate('Login');
+            setEmail("");
+            setPassword("");
+            navigation.navigate("Inside");
         } catch (error) {
             console.error(error);
             Alert.alert("Error", error.message);
@@ -25,9 +29,13 @@ const SignUp = () => {
         }
     };
 
+    const handleBackToLogin = () => {
+        navigation.navigate("Login");
+    };
+
     return (
         <View style={styles.container}>
-            <Text>Sign Up</Text>
+            <Text style={{fontSize: 20}}>Sign Up</Text>
             <TextInput
                 style={styles.input}
                 placeholder="Email"
@@ -42,7 +50,12 @@ const SignUp = () => {
                 onChangeText={setPassword}
                 secureTextEntry
             />
-            <Button title="Create Account" onPress={handleSignUp} disabled={loading} />
+            <View style={styles.button}>
+                <Button title="Create Account" onPress={handleSignUp} disabled={loading} style={styles.button} />
+            </View>
+            <View style={styles.button}>
+                <Button title="Powrót do ekranu logowania" onPress={handleBackToLogin} />
+            </View>
         </View>
     );
 };
@@ -56,11 +69,16 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     input: {
-        width: '80%',
-        padding: 10,
-        margin: 10,
+        height: 50,
+        marginVertical: 4,
         borderWidth: 1,
-        borderColor: '#ddd',
-        borderRadius: 5,
+        borderRadius: 4,
+        padding: 10,
+        backgroundColor: '#fff',
+        width: '80%',
+    },
+    button: {
+        marginTop: 5,
+        marginBottom: 5,
     },
 });

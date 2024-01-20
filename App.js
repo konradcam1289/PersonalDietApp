@@ -8,6 +8,11 @@ import { useEffect, useState } from 'react';
 import { FIREBASE_AUTH } from './src/app/Config/FirebaseConfig';
 import SignUp from './src/app/screens/SignUp';
 import BMICalculatorScreen from './src/app/screens/BMICalculatorScreen';
+import Dishes from './src/app/screens/Dishes';
+import DishDetails from './src/app/screens/DishDetails';
+import MealPlanner from './src/app/screens/MealPlanner';
+import DishSelector from './src/app/screens/DishSelector';
+import ShoppingList from './src/app/screens/ShoppingList';
 
 const StackActions = createNativeStackNavigator();
 
@@ -16,9 +21,14 @@ const InsideStack = createNativeStackNavigator();
 function InsideLayout () {
   return (
     <InsideStack.Navigator initialRouteName="Login">
-      <InsideStack.Screen name="My meals" component={List} />
+      <InsideStack.Screen name="Strona główna" component={List} options={{headerShown: false}} />
       <InsideStack.Screen name="Details" component={Details} />
-      <InsideStack.Screen name="BMI Calculator" component={BMICalculatorScreen} /> 
+      <InsideStack.Screen name="BMI Calculator" component={BMICalculatorScreen} />
+      <InsideStack.Screen name="DishDetails" component={DishDetails} />
+      <InsideStack.Screen name="MealPlanner" component={MealPlanner} /> 
+      <InsideStack.Screen name="DishSelector" component={DishSelector} />
+      <InsideStack.Screen name="ShoppingList" component={ShoppingList} />
+
     </InsideStack.Navigator>
   )
 }
@@ -26,13 +36,6 @@ function InsideLayout () {
 export default function App() {
   
   const [user, setUser] = useState(null);
-
-  // useEffect(() => {
-  //   onAuthStateChanged(FIREBASE_AUTH, (user) => {
-  //     console.log(user);
-  //     setUser(user);
-  //   });
-  // }, []);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(FIREBASE_AUTH, (user) => {
@@ -44,11 +47,11 @@ export default function App() {
     return () => unsubscribe();
 }, []);
 
-  
-
   return (
     <NavigationContainer>
       <StackActions.Navigator initialRouteName="Login">
+        
+        {/* pierwsza wersja */}
         {user ? (
           <StackActions.Screen 
           name="Inside" 
@@ -61,11 +64,15 @@ export default function App() {
           component={Login} 
           options={{ headerShown : false }} 
           />
+          
         )}
         <StackActions.Screen name="SignUp" component={SignUp} />
+        <StackActions.Screen name="Dishes" component={Dishes} />
       </StackActions.Navigator>
     </NavigationContainer>
   );
 }
+
+//druga wersja
 
 

@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TextInput, ActivityIndicator, Button, KeyboardAvoidingView } from 'react-native';
+import { View, Text, StyleSheet, TextInput, ActivityIndicator, Button, KeyboardAvoidingView, ImageBackground } from 'react-native';
 import React, { useState } from 'react';
 import { FIREBASE_AUTH } from '../Config/FirebaseConfig';
 import { signInWithEmailAndPassword } from 'firebase/auth';
@@ -25,54 +25,42 @@ const Login = () => {
             setLoading(false);
         }
     };
-
-    // const signUp = async () => {
-    //     setLoading(true);
-    //     try {
-    //         const response = await createUserWithEmailAndPassword(auth, email, password);
-    //         console.log(response);
-    //         alert('Check your emails!');
-    //     } catch(error) {
-    //         console.log(error);
-    //         alert('Sign in failed: ' + error.message);
-    //     } finally {
-    //         setLoading(false);
-    //     }
-    // };
-
-    
+    const backgroundImage = require('../Image/obraz1.png')
     return (
-        <View style={styles.container}>
-            <KeyboardAvoidingView behavior='padding'>
-                <TextInput 
-                value={email} 
-                style={styles.input} 
-                placeholder='Email' 
-                autoCapitalize='none' 
-                onChangeText={text => setEmail(text)}
-                >   
-                </TextInput>
-                <TextInput 
-                value={password} 
-                style={styles.input} 
-                placeholder='Password' 
-                autoCapitalize='none' 
-                onChangeText={text => setPassword(text)}
-                secureTextEntry={true}
-                >   
-                </TextInput>
+        <ImageBackground source={backgroundImage} style={styles.backgroundImage}>
+            <View style={styles.container}>
+                <KeyboardAvoidingView behavior='padding'>
+                    <Text style={{ fontSize: 30, textAlign: 'center', marginBottom: 50, color: 'black', fontWeight: '900' }}>DietApp - Twoja aplikacja do spersonalizowanej diety</Text>
+                    <TextInput 
+                    value={email} 
+                    style={styles.input} 
+                    placeholder='Email' 
+                    autoCapitalize='none' 
+                    onChangeText={text => setEmail(text)}
+                    >   
+                    </TextInput>
+                    <TextInput 
+                    value={password} 
+                    style={styles.input} 
+                    placeholder='Password' 
+                    autoCapitalize='none' 
+                    onChangeText={text => setPassword(text)}
+                    secureTextEntry={true}
+                    >   
+                    </TextInput>
 
-                { loading ? <ActivityIndicator size='large' color='#0000ff' /> 
-                : <>
-                <View style={styles.button}>
-                    <Button title='Login' onPress={signIn} />
-                </View>
-                <View style={styles.button}>
-                    <Button title='Register' onPress={() => navigation.navigate('SignUp')} style={styles.button} />
-                </View>
-                </>}
-            </KeyboardAvoidingView>
-        </View>
+                    { loading ? <ActivityIndicator size='large' color='#0000ff' /> 
+                    : <>
+                    <View style={styles.button}>
+                        <Button title='Login' onPress={signIn} />
+                    </View>
+                    <View style={styles.button}>
+                        <Button title='Register' onPress={() => navigation.navigate('SignUp')} style={styles.button} />
+                    </View>
+                    </>}
+                </KeyboardAvoidingView>
+            </View>
+        </ImageBackground>
     );
 };
 
@@ -95,5 +83,10 @@ const styles = StyleSheet.create({
     button: {
         marginTop: 5,
         marginBottom: 5,
-    }
+    },
+    backgroundImage: {
+        flex: 1,
+        width: '100%',
+        height: '100%',
+    },
 });
