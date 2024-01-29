@@ -1,112 +1,82 @@
-// import React, { useState, useEffect } from 'react';
-// import { View, Text, ActivityIndicator, StyleSheet } from 'react-native';
-// import { FIRESTORE_DB } from '../Config/FirebaseConfig';
-// import { doc, getDoc } from 'firebase/firestore';
-
-// const DishDetails = ({ route }) => {
-//   const { dishId } = route.params;
-//   const [dishDetails, setDishDetails] = useState(null);
-//   const [loading, setLoading] = useState(true);
-
-//   useEffect(() => {
-//     const fetchDishDetails = async () => {
-//       try {
-//         const dishRef = doc(FIRESTORE_DB, 'dishes', dishId);
-//         const dishSnap = await getDoc(dishRef);
-
-//         if (dishSnap.exists()) {
-//           setDishDetails(dishSnap.data());
-//         } else {
-//           console.log('No such dish!');
-//         }
-//       } catch (error) {
-//         console.error('Error getting dish details: ', error);
-//       } finally {
-//         setLoading(false);
-//       }
-//     };
-
-//     fetchDishDetails();
-//   }, [dishId]);
-
-//   if (loading) {
-//     return <ActivityIndicator />;
-//   }
-
-//   return (
-//     <View style={styles.container}>
-//       {dishDetails ? (
-//         <>
-//           {/* <Text style={styles.title}>{dishDetails.name}</Text> */}
-//           {/* Wyświetl inne szczegóły potrawy */}
-//           <Text style={styles.title}>{dishDetails.name}</Text>
-//         <Text>Calories: {dishDetails.calories}</Text>
-//         <Text>Ingredients:</Text>
-//         <Text>
-//         <ul>
-//           {dishDetails.ingredients.map((ingredient, index) => (
-//             <li key={index}>{ingredient}</li>
-//           ))}
-//         </ul>
-//         </Text>
-        
-        
-//         </>
-//       ) : (
-//         <Text>Nie znaleziono potrawy.</Text>
-//       )}
-//     </View>
-//   );
-// };
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     padding: 10,
-//   },
-//   title: {
-//     fontSize: 20,
-//     fontWeight: 'bold',
-//   },
-//   // Dodaj inne style, jak potrzebujesz
-// });
-
-// export default DishDetails;
-
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Image } from 'react-native';
 
 const DishDetails = ({ route }) => {
   const { dish } = route.params;
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       {dish ? (
         <>
+          {dish.image && <Image source={{ uri: dish.image }} style={styles.image} />}
           <Text style={styles.title}>{dish.name}</Text>
-          <Text>Calories: {dish.calories}</Text>
-          <Text>Ingredients:</Text>
-          {dish.ingredients && dish.ingredients.map((ingredient, index) => (
-            <Text key={index}>{ingredient}</Text>
-          ))}
+          <View style={styles.detailsContainer}>
+            <Text style={styles.detailsTitle}>Kalorie:</Text>
+            <Text style={styles.detailsText}>{dish.calories}</Text>
+          </View>
+          <View style={styles.detailsContainer}>
+            <Text style={styles.detailsTitle}>Składniki:</Text>
+            {dish.ingredients && dish.ingredients.map((ingredient, index) => (
+              <Text key={index} style={styles.ingredientText}>{ingredient}</Text>
+            ))}
+          </View>
         </>
       ) : (
-        <Text>Nie znaleziono potrawy.</Text>
+        <Text style={styles.notFoundText}>Nie znaleziono potrawy.</Text>
       )}
-    </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 10,
+    backgroundColor: '#fff',
+    padding: 20,
   },
   title: {
-    fontSize: 20,
+    fontSize: 24,
     fontWeight: 'bold',
+    marginBottom: 10,
+    color: '#333',
+    textAlign: 'center',
   },
-  // Dodaj inne style, jak potrzebujesz
+  detailsContainer: {
+    marginTop: 10,
+    marginBottom: 10,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ddd',
+  },
+  detailsTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#444',
+    marginBottom: 5,
+  },
+  detailsText: {
+    fontSize: 16,
+    color: '#555',
+    marginBottom: 5,
+  },
+  ingredientText: {
+    fontSize: 16,
+    color: '#666',
+    marginBottom: 3,
+  },
+  notFoundText: {
+    fontSize: 18,
+    color: 'red',
+    textAlign: 'center',
+    marginTop: 20,
+  },
+  image: {
+    width: '100%',
+    height: 200,
+    resizeMode: 'contain',
+    marginBottom: 20,
+  },
 });
 
 export default DishDetails;

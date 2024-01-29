@@ -4,6 +4,7 @@ import { FIREBASE_AUTH } from '../Config/FirebaseConfig';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useNavigation } from '@react-navigation/native';
+import BackgroundImage from '../components/BackgroundImage';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -27,7 +28,9 @@ const Login = () => {
     };
     const backgroundImage = require('../Image/obraz1.png')
     return (
+        
         <ImageBackground source={backgroundImage} style={styles.backgroundImage}>
+            <View style={styles.overlay}>
             <View style={styles.container}>
                 <KeyboardAvoidingView behavior='padding'>
                     <Text style={{ fontSize: 30, textAlign: 'center', marginBottom: 50, color: 'black', fontWeight: '900' }}>DietApp - Twoja aplikacja do spersonalizowanej diety</Text>
@@ -60,7 +63,9 @@ const Login = () => {
                     </>}
                 </KeyboardAvoidingView>
             </View>
+            </View>
         </ImageBackground>
+        
     );
 };
 
@@ -88,5 +93,9 @@ const styles = StyleSheet.create({
         flex: 1,
         width: '100%',
         height: '100%',
+    },
+    overlay: {
+        ...StyleSheet.absoluteFillObject,
+        backgroundColor: 'rgba(255, 255, 255, 0.4)',
     },
 });

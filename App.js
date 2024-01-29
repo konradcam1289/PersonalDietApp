@@ -13,6 +13,8 @@ import DishDetails from './src/app/screens/DishDetails';
 import MealPlanner from './src/app/screens/MealPlanner';
 import DishSelector from './src/app/screens/DishSelector';
 import ShoppingList from './src/app/screens/ShoppingList';
+import MyDiet from './src/app/screens/DayDishes';
+import AddDish from './src/app/screens/AddDish';
 
 const StackActions = createNativeStackNavigator();
 
@@ -28,7 +30,8 @@ function InsideLayout () {
       <InsideStack.Screen name="MealPlanner" component={MealPlanner} /> 
       <InsideStack.Screen name="DishSelector" component={DishSelector} />
       <InsideStack.Screen name="ShoppingList" component={ShoppingList} />
-
+      <InsideStack.Screen name="MyDiet" component={MyDiet} />
+      <InsideStack.Screen name="AddDish" component={AddDish} />
     </InsideStack.Navigator>
   )
 }
@@ -42,8 +45,6 @@ export default function App() {
         console.log(user);
         setUser(user);
     });
-
-    // Oczyszczanie subskrypcji
     return () => unsubscribe();
 }, []);
 
