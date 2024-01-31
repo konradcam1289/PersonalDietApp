@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, ActivityIndicator, TouchableOpacity, ImageBackground, StyleSheet } from 'react-native';
+import { View, Text, FlatList, ActivityIndicator, TouchableOpacity, ImageBackground, StyleSheet, Button } from 'react-native';
 import { FIRESTORE_DB } from '../Config/FirebaseConfig';
 import { collection, getDocs } from 'firebase/firestore';
 import { useNavigation } from '@react-navigation/native';
@@ -38,12 +38,19 @@ const Dishes = () => {
     navigation.navigate('AddDish');
   };
 
+  const navigateToUserDishes = () => {
+    navigation.navigate('UserDishes');
+  }
+
   return (
     <ImageBackground source={require('../Image/obraz1.png')} style={styles.backgroundImage}>
       <View style={styles.overlay}>
       <View style={styles.container}>
         <TouchableOpacity onPress={navigateToAddDish} style={styles.addButton}>
             <Text style={styles.addButtonText}>Dodaj Potrawę</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={navigateToUserDishes} style={styles.addButton}>
+            <Text style={styles.addButtonText}>Dania użytkownika</Text>
         </TouchableOpacity>
         <FlatList
           data={dishes}
@@ -52,9 +59,12 @@ const Dishes = () => {
             <TouchableOpacity onPress={() => handleSelectDish(item)} style={styles.item}>
               <Text style={styles.title}>{item.name}</Text>
             </TouchableOpacity>
+            
           )}
         />
+
       </View>
+
       </View>
     </ImageBackground>
   );

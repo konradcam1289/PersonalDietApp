@@ -1,6 +1,7 @@
 import { View, Text, Button, StyleSheet, ImageBackground } from 'react-native';
 import React from 'react';
 import { FIREBASE_AUTH } from '../Config/FirebaseConfig';
+import MyDiet from './DayDishes';
 
 const backgroundImage = require('../Image/obraz1.png')
 
@@ -25,7 +26,7 @@ const List = ({ navigation }) => {
                     <Button onPress={() => navigation.navigate('ShoppingList')} title='Lista zakupów' />
                 </View>
                 <View style={styles.button}>
-                    <Button onPress={() => navigation.navigate('MyDiet')} title='Moja dieta' />
+                    <Button onPress={() => navigation.navigate('DayDishes')} title='Moja dieta' />
                 </View>
                 <View style={styles.button}>
                     <Button onPress={() => FIREBASE_AUTH.signOut()} title='Logout' />

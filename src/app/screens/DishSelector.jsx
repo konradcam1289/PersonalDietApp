@@ -1,33 +1,43 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, ActivityIndicator, TouchableOpacity, StyleSheet } from 'react-native';
-import { FIRESTORE_DB } from '../Config/FirebaseConfig';
-import { collection, getDocs, addDoc } from 'firebase/firestore';
-import { useRoute } from '@react-navigation/native';
-import { useNavigation } from '@react-navigation/native';
+import { FIRESTORE_DB, FIREBASE_AUTH } from '../Config/FirebaseConfig';
+import { collection, getDocs, addDoc, query, where } from 'firebase/firestore';
+import { useRoute, useNavigation } from '@react-navigation/native';
 
 const DishSelector = () => {
   const [dishes, setDishes] = useState([]);
   const [loading, setLoading] = useState(true);
   const route = useRoute();
   const selectedDay = route.params ? route.params.selectedDate : null;
-
-
   const navigation = useNavigation();
 
   useEffect(() => {
     const fetchDishes = async () => {
       try {
-        const dishesCollection = collection(FIRESTORE_DB, 'dishes');
-        const dishesSnapshot = await getDocs(dishesCollection);
-        const dishesList = dishesSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        setDishes(dishesList);
+        const userId = FIREBASE_AUTH.currentUser?.uid;
+        if (!userId) {
+          throw new Error("Nie jesteś zalogowany");
+        }
+  
+        // Pobieranie publicznych dań
+        const publicDishesCollection = collection(FIRESTORE_DB, 'dishes');
+        const publicDishesSnapshot = await getDocs(publicDishesCollection);
+        const publicDishesList = publicDishesSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data(), isUserDish: false }));
+  
+        // Pobieranie dań użytkownika na podstawie userId
+        const userDishesQuery = query(collection(FIRESTORE_DB, 'userDishes'), where('userId', '==', userId));
+        const userDishesSnapshot = await getDocs(userDishesQuery);
+        const userDishesList = userDishesSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data(), isUserDish: true }));
+  
+        // Łączenie list dań
+        setDishes([...publicDishesList, ...userDishesList]);
       } catch (error) {
         console.error("Error getting dishes: ", error);
       } finally {
         setLoading(false);
       }
     };
-
+  
     fetchDishes();
   }, []);
 
@@ -39,7 +49,6 @@ const DishSelector = () => {
         dishId: dishId,
         dishName: dishName,
       });
-      console.log('Navigating to MyDiet with date:', selectedDay);
       navigation.navigate('MyDiet', { selectedDate: selectedDay });
       alert(`Dish added to ${selectedDay} successfully!`);
     } catch (error) {
@@ -58,7 +67,7 @@ const DishSelector = () => {
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <View style={styles.item}>
-            <Text style={styles.title}>{item.name}</Text>
+            <Text style={styles.title}>{item.name} {item.isUserDish ? '(User Dish)' : '(Public Dish)'}</Text>
             <TouchableOpacity 
               style={styles.addButton} 
               onPress={() => addDishToDay(item.id, item.name)}

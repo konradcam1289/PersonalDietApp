@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, ImageBackground } from 'react-native';
 
 class BMICalculatorScreen extends Component {
   constructor(props) {
@@ -42,24 +42,30 @@ class BMICalculatorScreen extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.title}>Kalkulator BMI</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Waga (kg)"
-          keyboardType="numeric"
-          onChangeText={(text) => this.setState({ weight: text })}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Wzrost (cm)"
-          keyboardType="numeric"
-          onChangeText={(text) => this.setState({ height: text })}
-        />
-        <Button title="Oblicz BMI" onPress={this.calculateBMI} />
-        <Text style={styles.result}>{this.state.bmi}</Text>
-        <Text style={styles.resultText}>{this.state.resultText}</Text>
-      </View>
+      <ImageBackground source={require('../Image/obraz1.png')} style={styles.backgroundImage}>
+        <View style={styles.overlay}>
+          <View style={styles.container}>
+          <Text style={styles.title}>Kalkulator BMI</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Waga (kg)"
+            placeholderTextColor={'black'}
+            keyboardType="numeric"
+            onChangeText={(text) => this.setState({ weight: text })}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Wzrost (cm)"
+            placeholderTextColor={'black'}
+            keyboardType="numeric"
+            onChangeText={(text) => this.setState({ height: text })}
+          />
+          <Button title="Oblicz BMI" onPress={this.calculateBMI} />
+          <Text style={styles.result}>{this.state.bmi}</Text>
+          <Text style={styles.resultText}>{this.state.resultText}</Text>
+          </View>
+        </View>
+      </ImageBackground>
     );
   }
 }
@@ -78,7 +84,7 @@ const styles = StyleSheet.create({
   input: {
     width: 200,
     height: 40,
-    borderColor: 'gray',
+    borderColor: 'black',
     borderWidth: 1,
     marginBottom: 10,
     paddingHorizontal: 10,
@@ -91,6 +97,17 @@ const styles = StyleSheet.create({
   resultText: {
     fontSize: 20,
     marginTop: 10,
+  },
+  backgroundImage: {
+    flex: 1,
+    width: '100%',
+    height: '100%',
+  },
+  overlay: {
+    flex: 1,
+    backgroundColor: 'rgba(255, 255, 255, 0.6)',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 

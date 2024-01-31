@@ -3,6 +3,7 @@ import { View, Text, FlatList, StyleSheet } from 'react-native';
 import { FIRESTORE_DB } from '../Config/FirebaseConfig';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { useRoute } from '@react-navigation/native';
+import Day from 'react-native-calendars/src/calendar/day';
 
 const MyDiet = () => {
   const [dailyMeals, setDailyMeals] = useState([]);

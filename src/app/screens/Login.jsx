@@ -4,7 +4,7 @@ import { FIREBASE_AUTH } from '../Config/FirebaseConfig';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useNavigation } from '@react-navigation/native';
-import BackgroundImage from '../components/BackgroundImage';
+
 
 const Login = () => {
     const [email, setEmail] = useState('');

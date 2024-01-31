@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, Alert, ImageBackground } from 'react-native';
 import { FIREBASE_AUTH } from '../Config/FirebaseConfig';
 import { reauthenticateWithCredential, EmailAuthProvider, updatePassword } from 'firebase/auth';
 
@@ -31,68 +31,90 @@ const Details = () => {
     };
 
     return (
-        <View style={styles.container}>
-            {user ? (
-                <>
-                    <Text style={styles.info}>Email: {user.email}</Text>
-                    <Button 
-                        title="Zmień hasło" 
-                        onPress={() => setShowChangePassword(!showChangePassword)} 
-                    />
-                    {showChangePassword && (
-                        <View style={styles.changePasswordContainer}>
-                            <TextInput 
-                                style={styles.input} 
-                                placeholder="Aktualny Email" 
-                                value={email}
-                                onChangeText={setEmail}
-                                autoCapitalize="none"
+        <ImageBackground 
+            source={require('../Image/obraz1.png')} 
+            style={styles.backgroundImage}
+        >
+            <View style={styles.overlay}>
+                <View style={styles.container}>
+                    {user ? (
+                        <>
+                            <Text style={styles.info}>Email: {user.email}</Text>
+                            <Button 
+                                title="Zmień hasło" 
+                                onPress={() => setShowChangePassword(!showChangePassword)} 
                             />
-                            <TextInput 
-                                style={styles.input} 
-                                placeholder="Aktualne hasło" 
-                                value={password}
-                                onChangeText={setPassword}
-                                secureTextEntry
-                            />
-                            <TextInput 
-                                style={styles.input} 
-                                placeholder="Nowe hasło" 
-                                value={newPassword}
-                                onChangeText={setNewPassword}
-                                secureTextEntry
-                            />
-                            <Button title="Zapisz nowe hasło" onPress={reauthenticateAndChangePassword} />
-                        </View>
+                            {showChangePassword && (
+                                <View style={styles.changePasswordContainer}>
+                                    <TextInput 
+                                        style={styles.input} 
+                                        placeholder="Aktualny Email" 
+                                        value={email}
+                                        onChangeText={setEmail}
+                                        autoCapitalize="none"
+                                    />
+                                    <TextInput 
+                                        style={styles.input} 
+                                        placeholder="Aktualne hasło" 
+                                        value={password}
+                                        onChangeText={setPassword}
+                                        secureTextEntry
+                                    />
+                                    <TextInput 
+                                        style={styles.input} 
+                                        placeholder="Nowe hasło" 
+                                        value={newPassword}
+                                        onChangeText={setNewPassword}
+                                        secureTextEntry
+                                    />
+                                    <Button title="Zapisz nowe hasło" onPress={reauthenticateAndChangePassword} />
+                                </View>
+                            )}
+                        </>
+                    ) : (
+                        <Text style={styles.info}>Nie jesteś zalogowany</Text>
                     )}
-                </>
-            ) : (
-                <Text style={styles.info}>Nie jesteś zalogowany</Text>
-            )}
-        </View>
+                </View>
+            </View>
+        </ImageBackground>
     );
 };
 
-export default Details;
-
 const styles = StyleSheet.create({
-    container: {
+    backgroundImage: {
         flex: 1,
+        width: '100%',
+        height: '100%',
+    },
+    overlay: {
+        flex: 1,
+        backgroundColor: 'rgba(255, 255, 255, 0.8)',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+    },
+    container: {
+        width: '90%',
+        padding: 20,
     },
     info: {
         fontSize: 20,
-        marginBottom: 10,
+        marginBottom: 20,
+        color: '#333',
     },
     input: {
         height: 40,
-        width: '500',
+        width: '100%',
         marginVertical: 10,
         borderWidth: 1,
+        borderColor: '#ddd',
         padding: 10,
+        borderRadius: 5,
+        backgroundColor: '#fff',
     },
     changePasswordContainer: {
         marginTop: 20,
     },
+    // Dodaj tutaj więcej stylów, jeśli potrzebujesz
 });
+
+export default Details;
