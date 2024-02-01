@@ -5,7 +5,7 @@ import { initializeAuth, getReactNativePersistence } from "firebase/auth";
 import { getStorage } from "firebase/storage";
 
 
-// Your web app's Firebase configuration
+
 const firebaseConfig = {
   apiKey: "AIzaSyDvlePY6U2lq4r_tg6HEcylyIlZFNA5_sM",
   authDomain: "personaldiet-df7d6.firebaseapp.com",
@@ -15,9 +15,10 @@ const firebaseConfig = {
   appId: "1:522898045068:web:6237f3b95ec73e9a32e3a9"
 };
 
-// Initialize Firebase
+
 export const FIREBASE_APP = initializeApp(firebaseConfig);
-//export const FIREBASE_AUTH = getAuth(FIREBASE_APP);
+
+
 export const FIREBASE_AUTH = initializeAuth(FIREBASE_APP, {
   persistence: getReactNativePersistence(AsyncStorage)
 });
