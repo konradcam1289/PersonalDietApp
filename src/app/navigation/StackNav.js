@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
 import { onAuthStateChanged } from 'firebase/auth';
-import { FIREBASE_AUTH } from '../Config/FirebaseConfig'; // Aktualizuj ścieżkę zgodnie z lokalizacją FirebaseConfig
-import Login from '../screens/Login'; // Aktualizuj ścieżki do ekranów
+import { FIREBASE_AUTH } from '../Config/FirebaseConfig';
+
+import Login from '../screens/Login';
 import SignUp from '../screens/SignUp';
-import Dishes from '../screens/Dishes';
-import InsideLayout from './InsideStackNav'; // Upewnij się, że ścieżka jest poprawna
+import InsideLayout from './InsideStackNav';
 
 const Stack = createNativeStackNavigator();
 

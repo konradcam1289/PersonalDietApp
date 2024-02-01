@@ -23,7 +23,7 @@ const ShoppingList = () => {
         });
         setItems(itemsFromFirestore);
       });
-      return () => unsubscribe(); // Detach listener on unmount
+      return () => unsubscribe();
     }
   }, [user]);
 
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 50,
-    backgroundColor: '#f5f5f5', // Jasny kolor tła
+    backgroundColor: '#f5f5f5',
   },
   input: {
     width: '80%',
@@ -124,28 +124,28 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     padding: 10,
     marginVertical: 5,
-    backgroundColor: '#e1e1e1', // Kolor tła dla elementów listy
+    backgroundColor: '#e1e1e1',
     borderRadius: 5,
     marginHorizontal: 20,
   },
   itemText: {
-    color: '#333', // Kolor tekstu
+    color: '#333',
   },
   purchasedItem: {
     textDecorationLine: 'line-through',
-    color: '#777', // Kolor przekreślonego tekstu
+    color: '#777',
   },
   buttons: {
     flexDirection: 'row',
   },
   button: {
-    backgroundColor: '#4c669f', // Kolor tła przycisków
+    backgroundColor: '#4c669f',
     padding: 5,
     marginHorizontal: 5,
     borderRadius: 5,
   },
   buttonText: {
-    color: '#fff', // Kolor tekstu przycisków
+    color: '#fff',
   },
   addButton: {
     backgroundColor: '#4c669f',

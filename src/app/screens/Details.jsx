@@ -114,7 +114,6 @@ const styles = StyleSheet.create({
     changePasswordContainer: {
         marginTop: 20,
     },
-    // Dodaj tutaj więcej stylów, jeśli potrzebujesz
 });
 
 export default Details;

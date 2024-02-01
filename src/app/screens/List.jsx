@@ -1,7 +1,6 @@
 import { View, Text, Button, StyleSheet, ImageBackground } from 'react-native';
 import React from 'react';
 import { FIREBASE_AUTH } from '../Config/FirebaseConfig';
-import MyDiet from './MyDiet';
 
 const backgroundImage = require('../Image/obraz1.png')
 

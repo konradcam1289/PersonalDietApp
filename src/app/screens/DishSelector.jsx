@@ -51,8 +51,8 @@ const DishSelector = () => {
         dishId: dish.id,
         dishName: dish.name,
         userId: userId,
-        calories: dish.calories,  // Dodajemy kalorie
-        ingredients: dish.ingredients,  // Dodajemy składniki
+        calories: dish.calories,
+        ingredients: dish.ingredients,
       });
       navigation.navigate('MyDiet', { selectedDate: selectedDay });
       alert(`Dish added to ${selectedDay} successfully!`);
@@ -99,20 +99,20 @@ const DishSelector = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f2f2f2', // Jasny, neutralny kolor tła
+    backgroundColor: '#f2f2f2',
   },
   item: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: '#fff', // Białe tło dla elementów listy
+    backgroundColor: '#fff',
     padding: 15,
     borderBottomWidth: 1,
     borderBottomColor: '#dddddd',
     marginHorizontal: 10,
     marginVertical: 5,
-    borderRadius: 8, // Zaokrąglenie rogów elementów listy
-    shadowColor: '#000', // Cień dla elementów listy
+    borderRadius: 8,
+    shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
@@ -120,10 +120,10 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 16,
-    color: '#333333', // Ciemniejszy kolor tekstu
+    color: '#333333',
   },
   addButton: {
-    backgroundColor: '#4caf50', // Żywy kolor przycisku
+    backgroundColor: '#4caf50',
     paddingVertical: 8,
     paddingHorizontal: 12,
     borderRadius: 5,
@@ -132,18 +132,18 @@ const styles = StyleSheet.create({
   addButtonText: {
     color: 'white',
     fontSize: 14,
-    fontWeight: 'bold', // Pogrubienie tekstu przycisku
+    fontWeight: 'bold',
   },
   goToMyDietButton: {
-    backgroundColor: '#4caf50', // Kolor tła przycisku
+    backgroundColor: '#4caf50',
     padding: 10,
     borderRadius: 5,
     alignSelf: 'center',
     marginTop: 10,
-    marginBottom: 20, // Marginesy dla oddzielenia od listy
+    marginBottom: 20,
   },
   goToMyDietButtonText: {
-    color: 'white', // Kolor tekstu
+    color: 'white',
     fontSize: 16,
     fontWeight: 'bold',
   },

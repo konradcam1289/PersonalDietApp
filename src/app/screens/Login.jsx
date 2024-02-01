@@ -2,7 +2,6 @@ import { View, Text, StyleSheet, TextInput, ActivityIndicator, Button, KeyboardA
 import React, { useState } from 'react';
 import { FIREBASE_AUTH } from '../Config/FirebaseConfig';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useNavigation } from '@react-navigation/native';
 
 
