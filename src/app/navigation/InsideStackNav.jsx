@@ -21,18 +21,18 @@ const InsideLayout = () => {
   return (
     <InsideStack.Navigator initialRouteName="Strona główna">
       <InsideStack.Screen name="Strona główna" component={List} options={{ headerShown: false }} />
-      <InsideStack.Screen name="Details" component={Details} />
-      <InsideStack.Screen name="BMI Calculator" component={BMICalculatorScreen} />
-      <InsideStack.Screen name="DishDetails" component={DishDetails} />
-      <InsideStack.Screen name="MealPlanner" component={MealPlanner} /> 
-      <InsideStack.Screen name="DishSelector" component={DishSelector} />
-      <InsideStack.Screen name="ShoppingList" component={ShoppingList} />
-      <InsideStack.Screen name="MyDiet" component={MyDiet} />
-      <InsideStack.Screen name="AddDish" component={AddDish} />
-      <InsideStack.Screen name="Dishes" component={Dishes} />
-      <InsideStack.Screen name="UserDishes" component={UserDishes} />
-      <InsideStack.Screen name="ChosenMeals" component={ChosenMeals} />
-      <InsideStack.Screen name="UserMealScreen" component={UserMealsScreen} />
+      <InsideStack.Screen name="Details" component={Details} options={{ headerShown: false }} />
+      <InsideStack.Screen name="BMI Calculator" component={BMICalculatorScreen} options={{ headerShown: false }} />
+      <InsideStack.Screen name="DishDetails" component={DishDetails} options={{ headerShown: false }} />
+      <InsideStack.Screen name="MealPlanner" component={MealPlanner} options={{ headerShown: false }} /> 
+      <InsideStack.Screen name="DishSelector" component={DishSelector} options={{ headerShown: false }} />
+      <InsideStack.Screen name="ShoppingList" component={ShoppingList} options={{ headerShown: false }} />
+      <InsideStack.Screen name="MyDiet" component={MyDiet} options={{ headerShown: false }} />
+      <InsideStack.Screen name="AddDish" component={AddDish} options={{ headerShown: false }} />
+      <InsideStack.Screen name="Dishes" component={Dishes} options={{ headerShown: false }} />
+      <InsideStack.Screen name="UserDishes" component={UserDishes} options={{ headerShown: false }} />
+      <InsideStack.Screen name="ChosenMeals" component={ChosenMeals} options={{ headerShown: false }} />
+      <InsideStack.Screen name="UserMealScreen" component={UserMealsScreen} options={{ headerShown: false }} />
     </InsideStack.Navigator>
   );
 };
