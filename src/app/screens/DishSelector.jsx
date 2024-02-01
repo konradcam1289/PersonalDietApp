@@ -19,17 +19,14 @@ const DishSelector = () => {
           throw new Error("Nie jesteś zalogowany");
         }
   
-        // Pobieranie publicznych dań
         const publicDishesCollection = collection(FIRESTORE_DB, 'dishes');
         const publicDishesSnapshot = await getDocs(publicDishesCollection);
         const publicDishesList = publicDishesSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data(), isUserDish: false }));
   
-        // Pobieranie dań użytkownika na podstawie userId
         const userDishesQuery = query(collection(FIRESTORE_DB, 'userDishes'), where('userId', '==', userId));
         const userDishesSnapshot = await getDocs(userDishesQuery);
         const userDishesList = userDishesSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data(), isUserDish: true }));
   
-        // Łączenie list dań
         setDishes([...publicDishesList, ...userDishesList]);
       } catch (error) {
         console.error("Error getting dishes: ", error);
@@ -43,11 +40,17 @@ const DishSelector = () => {
 
   const addDishToDay = async (dishId, dishName) => {
     try {
+      const userId = FIREBASE_AUTH.currentUser?.uid;
+      if (!userId) {
+        throw new Error("Nie jesteś zalogowany");
+      }
+
       const selectedDishesRef = collection(FIRESTORE_DB, 'SelectedDishes');
       await addDoc(selectedDishesRef, {
         date: selectedDay,
         dishId: dishId,
         dishName: dishName,
+        userId: userId,
       });
       navigation.navigate('MyDiet', { selectedDate: selectedDay });
       alert(`Dish added to ${selectedDay} successfully!`);

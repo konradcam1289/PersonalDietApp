@@ -26,7 +26,7 @@ const List = ({ navigation }) => {
                     <Button onPress={() => navigation.navigate('ShoppingList')} title='Lista zakupów' />
                 </View>
                 <View style={styles.button}>
-                    <Button onPress={() => navigation.navigate('DayDishes')} title='Moja dieta' />
+                    <Button onPress={() => navigation.navigate('UserMealScreen')} title='Moje posiłki' />
                 </View>
                 <View style={styles.button}>
                     <Button onPress={() => FIREBASE_AUTH.signOut()} title='Logout' />

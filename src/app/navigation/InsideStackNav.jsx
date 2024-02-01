@@ -11,7 +11,8 @@ import MyDiet from '../screens/DayDishes';
 import AddDish from '../screens/AddDish';
 import Dishes from '../screens/Dishes';
 import UserDishes from '../screens/UserDishes';
-import ChosenMeals from '../screens/ChosenMeals';
+import ChosenMeals from '../screens/UserMealScreen';
+import UserMealsScreen from '../screens/UserMealScreen';
 
 
 const InsideStack = createNativeStackNavigator();
@@ -31,7 +32,7 @@ const InsideLayout = () => {
       <InsideStack.Screen name="Dishes" component={Dishes} />
       <InsideStack.Screen name="UserDishes" component={UserDishes} />
       <InsideStack.Screen name="ChosenMeals" component={ChosenMeals} />
-      <InsideStack.Screen name="DayDishes" component={DishDetails} />
+      <InsideStack.Screen name="UserMealScreen" component={UserMealsScreen} />
     </InsideStack.Navigator>
   );
 };

@@ -3,17 +3,25 @@ import { View, Text, FlatList, StyleSheet } from 'react-native';
 import { FIRESTORE_DB } from '../Config/FirebaseConfig';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { useRoute } from '@react-navigation/native';
-import Day from 'react-native-calendars/src/calendar/day';
+import { useAuth } from '../hooks/useAuth'; // Upewnij się, że ten hook jest prawidłowo zaimplementowany
 
 const MyDiet = () => {
   const [dailyMeals, setDailyMeals] = useState([]);
   const route = useRoute();
   const selectedDate = route.params.selectedDate;
+  const { currentUser } = useAuth(); // Upewnij się, że hook useAuth prawidłowo zwraca currentUser
 
   useEffect(() => {
     const fetchMeals = async () => {
+      if (!currentUser) {
+        console.error('No user logged in');
+        return;
+      }
+
       try {
-        const q = query(collection(FIRESTORE_DB, 'SelectedDishes'), where('date', '==', selectedDate));
+        const q = query(collection(FIRESTORE_DB, 'SelectedDishes'), 
+                        where('date', '==', selectedDate),
+                        where('userId', '==', currentUser.uid)); // Używamy userId do filtrowania danych
         const querySnapshot = await getDocs(q);
         const meals = querySnapshot.docs.map(doc => doc.data());
         setDailyMeals(meals);
@@ -23,7 +31,7 @@ const MyDiet = () => {
     };
 
     fetchMeals();
-  }, [selectedDate]);
+  }, [selectedDate, currentUser]);
 
   const renderItem = ({ item }) => (
     <View style={styles.mealItem}>
