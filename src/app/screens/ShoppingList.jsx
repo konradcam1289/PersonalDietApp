@@ -68,13 +68,13 @@ const ShoppingList = () => {
     }
 
     return (
-      <TouchableOpacity style={styles.item} onPress={() => toggleItem(item.id)}>
+      <TouchableOpacity style={styles.item} onPress={() => toggleItemInFirestore(item)}>
         <Text style={item.purchased ? styles.purchasedItem : styles.itemText}>{item.name}</Text>
         <View style={styles.buttons}>
           <TouchableOpacity style={styles.button} onPress={() => startEditItem(item)}>
             <Text style={styles.buttonText}>Edytuj</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={() => removeItem(item.id)}>
+          <TouchableOpacity style={styles.button} onPress={() => removeItemFromFirestore(item.id)}>
             <Text style={styles.buttonText}>Usuń</Text>
           </TouchableOpacity>
         </View>

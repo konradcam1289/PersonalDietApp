@@ -38,19 +38,21 @@ const DishSelector = () => {
     fetchDishes();
   }, []);
 
-  const addDishToDay = async (dishId, dishName) => {
+  const addDishToDay = async (dish) => {
     try {
       const userId = FIREBASE_AUTH.currentUser?.uid;
       if (!userId) {
         throw new Error("Nie jesteś zalogowany");
       }
-
+  
       const selectedDishesRef = collection(FIRESTORE_DB, 'SelectedDishes');
       await addDoc(selectedDishesRef, {
         date: selectedDay,
-        dishId: dishId,
-        dishName: dishName,
+        dishId: dish.id,
+        dishName: dish.name,
         userId: userId,
+        calories: dish.calories,  // Dodajemy kalorie
+        ingredients: dish.ingredients,  // Dodajemy składniki
       });
       navigation.navigate('MyDiet', { selectedDate: selectedDay });
       alert(`Dish added to ${selectedDay} successfully!`);
@@ -58,6 +60,7 @@ const DishSelector = () => {
       console.error('Error adding dish to day: ', error);
     }
   };
+  
 
   if (loading) {
     return <ActivityIndicator />;
@@ -65,20 +68,29 @@ const DishSelector = () => {
 
   return (
     <View style={styles.container}>
-      <FlatList
-        data={dishes}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <View style={styles.item}>
-            <Text style={styles.title}>{item.name} {item.isUserDish ? '(User Dish)' : '(Public Dish)'}</Text>
-            <TouchableOpacity 
-              style={styles.addButton} 
-              onPress={() => addDishToDay(item.id, item.name)}
-            >
-              <Text style={styles.addButtonText}>Add to Day</Text>
-            </TouchableOpacity>
+      <TouchableOpacity 
+      style={styles.goToMyDietButton} 
+      onPress={() => navigation.navigate('MyDiet', { selectedDate: selectedDay })}
+    >
+      <Text style={styles.goToMyDietButtonText}>Przejdź do Mojej Diety</Text>
+    </TouchableOpacity>
+    <FlatList
+    data={dishes}
+    keyExtractor={(item) => item.id}
+    renderItem={({ item }) => (
+      <View style={styles.item}>
+        <Text style={styles.title}>
+          {item.name} {item.isUserDish ? '(Własne)' : ''}
+        </Text>
+        <TouchableOpacity 
+          style={styles.addButton} 
+          onPress={() => addDishToDay(item)}
+        >
+          <Text style={styles.addButtonText}>Add to Day</Text>
+        </TouchableOpacity>
           </View>
         )}
+        
       />
     </View>
   );
@@ -87,28 +99,54 @@ const DishSelector = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 10,
+    backgroundColor: '#f2f2f2', // Jasny, neutralny kolor tła
   },
   item: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: 10,
+    backgroundColor: '#fff', // Białe tło dla elementów listy
+    padding: 15,
     borderBottomWidth: 1,
-    borderBottomColor: '#cccccc',
+    borderBottomColor: '#dddddd',
+    marginHorizontal: 10,
+    marginVertical: 5,
+    borderRadius: 8, // Zaokrąglenie rogów elementów listy
+    shadowColor: '#000', // Cień dla elementów listy
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
   },
   title: {
-    fontSize: 18,
-    color: 'black',
+    fontSize: 16,
+    color: '#333333', // Ciemniejszy kolor tekstu
   },
   addButton: {
-    backgroundColor: 'green',
-    padding: 10,
+    backgroundColor: '#4caf50', // Żywy kolor przycisku
+    paddingVertical: 8,
+    paddingHorizontal: 12,
     borderRadius: 5,
+    elevation: 2,
   },
   addButtonText: {
     color: 'white',
-  }
+    fontSize: 14,
+    fontWeight: 'bold', // Pogrubienie tekstu przycisku
+  },
+  goToMyDietButton: {
+    backgroundColor: '#4caf50', // Kolor tła przycisku
+    padding: 10,
+    borderRadius: 5,
+    alignSelf: 'center',
+    marginTop: 10,
+    marginBottom: 20, // Marginesy dla oddzielenia od listy
+  },
+  goToMyDietButtonText: {
+    color: 'white', // Kolor tekstu
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
 });
 
 export default DishSelector;

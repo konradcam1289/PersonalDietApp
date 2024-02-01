@@ -7,7 +7,7 @@ import DishDetails from '../screens/DishDetails';
 import MealPlanner from '../screens/MealPlanner';
 import DishSelector from '../screens/DishSelector';
 import ShoppingList from '../screens/ShoppingList';
-import MyDiet from '../screens/DayDishes';
+import MyDiet from '../screens/MyDiet';
 import AddDish from '../screens/AddDish';
 import Dishes from '../screens/Dishes';
 import UserDishes from '../screens/UserDishes';
