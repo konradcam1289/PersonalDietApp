@@ -69,49 +69,47 @@ const DishSelector = () => {
   return (
     <View style={styles.container}>
       <TouchableOpacity 
-      style={styles.goToMyDietButton} 
-      onPress={() => navigation.navigate('MyDiet', { selectedDate: selectedDay })}
-    >
-      <Text style={styles.goToMyDietButtonText}>Przejdź do Mojej Diety</Text>
-    </TouchableOpacity>
-    <FlatList
-    data={dishes}
-    keyExtractor={(item) => item.id}
-    renderItem={({ item }) => (
-      <View style={styles.item}>
-        <Text style={styles.title}>
-          {item.name} {item.isUserDish ? '(Własne)' : ''}
-        </Text>
-        <TouchableOpacity 
-          style={styles.addButton} 
-          onPress={() => addDishToDay(item)}
-        >
-          <Text style={styles.addButtonText}>Add to Day</Text>
-        </TouchableOpacity>
+        style={styles.goToMyDietButton} 
+        onPress={() => navigation.navigate('MyDiet', { selectedDate: selectedDay })}
+      >
+        <Text style={styles.goToMyDietButtonText}>Przejdź do Mojej Diety</Text>
+      </TouchableOpacity>
+      <FlatList
+        data={dishes}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }) => (
+          <View style={styles.item}>
+            <Text style={styles.title}>
+              {item.name} {item.isUserDish ? '(własne)' : ''}
+            </Text>
+            <TouchableOpacity 
+              style={styles.addButton} 
+              onPress={() => addDishToDay(item)}
+            >
+              <Text style={styles.addButtonText}>Dodaj</Text>
+            </TouchableOpacity>
           </View>
         )}
-        
       />
     </View>
   );
+  
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f2f2f2',
+    backgroundColor: '#F0F0F0',
   },
   item: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: '#fff',
-    padding: 15,
-    borderBottomWidth: 1,
-    borderBottomColor: '#dddddd',
-    marginHorizontal: 10,
-    marginVertical: 5,
-    borderRadius: 8,
+    backgroundColor: '#FFFFFF',
+    padding: 20,
+    marginVertical: 8,
+    marginHorizontal: 16,
+    borderRadius: 20,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
@@ -119,34 +117,37 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   title: {
-    fontSize: 16,
-    color: '#333333',
+    fontSize: 18,
+    color: '#4C9A70',
+    flex: 1,
+    flexWrap: 'wrap',
   },
   addButton: {
-    backgroundColor: '#4caf50',
-    paddingVertical: 8,
-    paddingHorizontal: 12,
-    borderRadius: 5,
+    backgroundColor: '#A8D5BA',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 20,
     elevation: 2,
   },
   addButtonText: {
-    color: 'white',
-    fontSize: 14,
+    color: '#FFFFFF',
+    fontSize: 16,
     fontWeight: 'bold',
   },
   goToMyDietButton: {
-    backgroundColor: '#4caf50',
-    padding: 10,
-    borderRadius: 5,
+    backgroundColor: '#4C9A70',
+    padding: 15,
+    borderRadius: 20,
     alignSelf: 'center',
     marginTop: 10,
     marginBottom: 20,
   },
   goToMyDietButtonText: {
-    color: 'white',
-    fontSize: 16,
+    color: '#FFFFFF',
+    fontSize: 18,
     fontWeight: 'bold',
   },
 });
+
 
 export default DishSelector;

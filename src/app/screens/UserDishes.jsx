@@ -56,33 +56,32 @@ const UserDishes = () => {
         )}
       />
     </View>
-  );
+  );  
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 10,
+    backgroundColor: '#F0F0F0',
   },
   item: {
-    padding: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: '#cccccc',
+    padding: 20,
+    marginVertical: 8,
+    marginHorizontal: 16,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 20,
+    elevation: 3,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 6,
+    shadowOpacity: 0.1,
   },
   title: {
     fontSize: 18,
-    color: 'black',
-  },
-  item: {
-    padding: 15,
-    borderBottomWidth: 1,
-    borderBottomColor: '#dddddd',
-    backgroundColor: 'rgba(255, 255, 255, 0.8)',
-    marginVertical: 5,
-    marginHorizontal: 10,
-    borderRadius: 10,
-    elevation: 1
+    color: '#4C9A70',
+    fontWeight: 'bold',
   },
 });
+
 
 export default UserDishes;

@@ -31,89 +31,95 @@ const Details = () => {
     };
 
     return (
-        <ImageBackground 
-            source={require('../Image/obraz1.png')} 
-            style={styles.backgroundImage}
-        >
-            <View style={styles.overlay}>
-                <View style={styles.container}>
-                    {user ? (
-                        <>
-                            <Text style={styles.info}>Email: {user.email}</Text>
-                            <Button 
-                                title="Zmień hasło" 
-                                onPress={() => setShowChangePassword(!showChangePassword)} 
-                            />
-                            {showChangePassword && (
-                                <View style={styles.changePasswordContainer}>
-                                    <TextInput 
-                                        style={styles.input} 
-                                        placeholder="Aktualny Email" 
-                                        value={email}
-                                        onChangeText={setEmail}
-                                        autoCapitalize="none"
+        <View style={styles.container}>
+            <View style={styles.innerContainer}>
+                {user ? (
+                    <>
+                        <Text style={styles.info}>Email: {user.email}</Text>
+                        <Button 
+                            title="Zmień hasło" 
+                            onPress={() => setShowChangePassword(!showChangePassword)} 
+                            color="#4C9A70"
+                        />
+                        {showChangePassword && (
+                            <View style={styles.changePasswordContainer}>
+                                <TextInput 
+                                    style={styles.input} 
+                                    placeholder="Aktualny Email" 
+                                    value={email}
+                                    onChangeText={setEmail}
+                                    autoCapitalize="none"
+                                />
+                                <TextInput 
+                                    style={styles.input} 
+                                    placeholder="Aktualne hasło" 
+                                    value={password}
+                                    onChangeText={setPassword}
+                                    secureTextEntry
+                                />
+                                <TextInput 
+                                    style={styles.input} 
+                                    placeholder="Nowe hasło" 
+                                    value={newPassword}
+                                    onChangeText={setNewPassword}
+                                    secureTextEntry
+                                />
+                                <View style={styles.button}>
+                                    <Button 
+                                        title="Zapisz nowe hasło" 
+                                        onPress={reauthenticateAndChangePassword} 
+                                        color="#4C9A70"
                                     />
-                                    <TextInput 
-                                        style={styles.input} 
-                                        placeholder="Aktualne hasło" 
-                                        value={password}
-                                        onChangeText={setPassword}
-                                        secureTextEntry
-                                    />
-                                    <TextInput 
-                                        style={styles.input} 
-                                        placeholder="Nowe hasło" 
-                                        value={newPassword}
-                                        onChangeText={setNewPassword}
-                                        secureTextEntry
-                                    />
-                                    <Button title="Zapisz nowe hasło" onPress={reauthenticateAndChangePassword} />
                                 </View>
-                            )}
-                        </>
-                    ) : (
-                        <Text style={styles.info}>Nie jesteś zalogowany</Text>
-                    )}
-                </View>
+                            </View>
+                        )}
+                    </>
+                ) : (
+                    <Text style={styles.info}>Nie jesteś zalogowany</Text>
+                )}
             </View>
-        </ImageBackground>
+        </View>
     );
 };
 
 const styles = StyleSheet.create({
-    backgroundImage: {
+    container: {
         flex: 1,
-        width: '100%',
-        height: '100%',
-    },
-    overlay: {
-        flex: 1,
-        backgroundColor: 'rgba(255, 255, 255, 0.8)',
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: '#F0F0F0',
     },
-    container: {
-        width: '90%',
-        padding: 20,
+    title: {
+        fontSize: 24,
+        color: '#4C9A70',
+        fontWeight: 'bold',
+        marginBottom: 20,
     },
     info: {
-        fontSize: 20,
-        marginBottom: 20,
+        fontSize: 18,
         color: '#333',
+        marginBottom: 20,
     },
     input: {
-        height: 40,
-        width: '100%',
+        height: 50,
+        width: '80%',
         marginVertical: 10,
         borderWidth: 1,
-        borderColor: '#ddd',
-        padding: 10,
-        borderRadius: 5,
-        backgroundColor: '#fff',
+        borderColor: '#A8D5BA',
+        borderRadius: 25,
+        padding: 15,
+        backgroundColor: '#FFFFFF',
+    },
+    buttonContainer: {
+        marginTop: 10,
+        width: '80%',
+        borderRadius: 25,
     },
     changePasswordContainer: {
+        width: '80%',
         marginTop: 20,
     },
 });
+
 
 export default Details;

@@ -1,29 +1,26 @@
-// SignUp.js
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, Alert, ActivityIndicator } from 'react-native';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { FIREBASE_AUTH } from '../Config/FirebaseConfig';
 import { useNavigation } from '@react-navigation/native';
-
 
 const SignUp = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
     const navigation = useNavigation();
-    
 
     const handleSignUp = async () => {
         setLoading(true);
         try {
             await createUserWithEmailAndPassword(FIREBASE_AUTH, email, password);
-            Alert.alert("Success", "Account created successfully");
+            Alert.alert("Success", "Konto zostało pomyślnie utworzone.");
             setEmail("");
             setPassword("");
             navigation.navigate("Inside");
         } catch (error) {
             console.error(error);
-            Alert.alert("Error", error.message);
+            Alert.alert("Błąd", error.message);
         } finally {
             setLoading(false);
         }
@@ -35,7 +32,7 @@ const SignUp = () => {
 
     return (
         <View style={styles.container}>
-            <Text style={{fontSize: 20}}>Sign Up</Text>
+            <Text style={styles.title}>Załóż konto</Text>
             <TextInput
                 style={styles.input}
                 placeholder="Email"
@@ -45,16 +42,20 @@ const SignUp = () => {
             />
             <TextInput
                 style={styles.input}
-                placeholder="Password"
+                placeholder="Hasło"
                 value={password}
                 onChangeText={setPassword}
                 secureTextEntry
             />
-            <View style={styles.button}>
-                <Button title="Create Account" onPress={handleSignUp} disabled={loading} style={styles.button} />
-            </View>
-            <View style={styles.button}>
-                <Button title="Powrót do ekranu logowania" onPress={handleBackToLogin} />
+            {loading ? (
+                <ActivityIndicator size="large" color="#4C9A70" />
+            ) : (
+                <View style={styles.buttonContainer}>
+                    <Button title="Utwórz konto" onPress={handleSignUp} color="#4C9A70" />
+                </View>
+            )}
+            <View style={styles.buttonContainer}>
+                <Button title="Powrót do ekranu logowania" onPress={handleBackToLogin} color="#A8D5BA" />
             </View>
         </View>
     );
@@ -66,19 +67,28 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        backgroundColor: '#F0F0F0',
+    },
+    title: {
+        fontSize: 24,
+        marginBottom: 30,
+        color: '#4C9A70',
+        fontWeight: 'bold',
     },
     input: {
         height: 50,
-        marginVertical: 4,
+        marginVertical: 10,
         borderWidth: 1,
-        borderRadius: 4,
-        padding: 10,
-        backgroundColor: '#fff',
+        borderColor: '#A8D5BA',
+        borderRadius: 25,
+        padding: 15,
+        backgroundColor: '#FFFFFF',
         width: '80%',
     },
-    button: {
-        marginTop: 5,
-        marginBottom: 5,
+    buttonContainer: {
+        marginTop: 10,
+        width: '80%',
+        borderRadius: 25,
     },
 });

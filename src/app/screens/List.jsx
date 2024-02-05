@@ -1,38 +1,33 @@
-import { View, Text, Button, StyleSheet, ImageBackground } from 'react-native';
+import { View, Text, Button, StyleSheet } from 'react-native';
 import React from 'react';
 import { FIREBASE_AUTH } from '../Config/FirebaseConfig';
 
-const backgroundImage = require('../Image/obraz1.png')
-
 const List = ({ navigation }) => {
     return (
-        <ImageBackground source={backgroundImage} style={styles.backgroundImage}>
-            <View style={styles.overlay}>
-            <View style={styles.container}>
-                <View style={styles.button}>
-                    <Button onPress={() => navigation.navigate('Details')} title='Dane profilowe' />
-                </View>
-                <View style={styles.button}>
-                    <Button onPress={() => navigation.navigate('BMI Calculator')} title='Kalkulator BMI' />
-                </View>
-                <View style={styles.button}>
-                    <Button onPress={() => navigation.navigate('Dishes')} title='Lista dań' />
-                </View>
-                <View style={styles.button}>
-                    <Button onPress={() => navigation.navigate('MealPlanner')} title='Plan żywienia' />
-                </View>
-                <View style={styles.button}>
-                    <Button onPress={() => navigation.navigate('ShoppingList')} title='Lista zakupów' />
-                </View>
-                <View style={styles.button}>
-                    <Button onPress={() => navigation.navigate('UserMealScreen')} title='Moje posiłki' />
-                </View>
-                <View style={styles.button}>
-                    <Button onPress={() => FIREBASE_AUTH.signOut()} title='Logout' />
-                </View>
+        <View style={styles.container}>
+            <Text style={styles.title}>Menu główne</Text>
+            <View style={styles.buttonContainer}>
+                <Button onPress={() => navigation.navigate('Details')} title='Dane profilowe' color='#4C9A70' />
             </View>
+            <View style={styles.buttonContainer}>
+                <Button onPress={() => navigation.navigate('BMI Calculator')} title='Kalkulator BMI' color='#4C9A70' />
             </View>
-        </ImageBackground>
+            <View style={styles.buttonContainer}>
+                <Button onPress={() => navigation.navigate('Dishes')} title='Lista dań' color='#4C9A70' />
+            </View>
+            <View style={styles.buttonContainer}>
+                <Button onPress={() => navigation.navigate('MealPlanner')} title='Plan żywienia' color='#4C9A70' />
+            </View>
+            <View style={styles.buttonContainer}>
+                <Button onPress={() => navigation.navigate('ShoppingList')} title='Lista zakupów' color='#4C9A70' />
+            </View>
+            <View style={styles.buttonContainer}>
+                <Button onPress={() => navigation.navigate('UserMealScreen')} title='Moje posiłki' color='#4C9A70' />
+            </View>
+            <View style={styles.buttonContainer}>
+                <Button onPress={() => FIREBASE_AUTH.signOut()} title='Wyloguj' color='#4C9A70' />
+            </View>
+        </View>
     );
 };
 
@@ -42,20 +37,19 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        backgroundColor: '#F0F0F0',
     },
-    button: {
-        marginTop: 5,
-        marginBottom: 5,
+    title: {
+        fontSize: 24,
+        marginBottom: 30,
+        color: '#4C9A70',
+        fontWeight: 'bold',
+    },
+    buttonContainer: {
+        marginTop: 10,
+        marginBottom: 10,
         width: '80%',
-    },
-    backgroundImage: {
-        flex: 1,
-        width: '100%',
-        height: '100%',
-    },
-    overlay: {
-        ...StyleSheet.absoluteFillObject,
-        backgroundColor: 'rgba(255, 255, 255, 0.6)',
+        borderRadius: 25,
     },
 });

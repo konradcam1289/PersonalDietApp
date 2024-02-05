@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, ImageBackground } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 
 class BMICalculatorScreen extends Component {
   constructor(props) {
@@ -42,30 +42,26 @@ class BMICalculatorScreen extends Component {
 
   render() {
     return (
-      <ImageBackground source={require('../Image/obraz1.png')} style={styles.backgroundImage}>
-        <View style={styles.overlay}>
-          <View style={styles.container}>
-          <Text style={styles.title}>Kalkulator BMI</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Waga (kg)"
-            placeholderTextColor={'black'}
-            keyboardType="numeric"
-            onChangeText={(text) => this.setState({ weight: text })}
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Wzrost (cm)"
-            placeholderTextColor={'black'}
-            keyboardType="numeric"
-            onChangeText={(text) => this.setState({ height: text })}
-          />
-          <Button title="Oblicz BMI" onPress={this.calculateBMI} />
-          <Text style={styles.result}>{this.state.bmi}</Text>
-          <Text style={styles.resultText}>{this.state.resultText}</Text>
-          </View>
+      <View style={styles.container}>
+        <Text style={styles.title}>Kalkulator BMI</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Waga (kg)"
+          keyboardType="numeric"
+          onChangeText={(text) => this.setState({ weight: text })}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Wzrost (cm)"
+          keyboardType="numeric"
+          onChangeText={(text) => this.setState({ height: text })}
+        />
+        <View style={styles.buttonContainer}>
+          <Button title="Oblicz BMI" onPress={this.calculateBMI} color="#4C9A70" />
         </View>
-      </ImageBackground>
+        <Text style={styles.result}>{this.state.bmi}</Text>
+        <Text style={styles.resultText}>{this.state.resultText}</Text>
+      </View>
     );
   }
 }
@@ -75,40 +71,42 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#F0F0F0',
   },
   title: {
-    fontSize: 24,
+    fontSize: 30,
     fontWeight: 'bold',
-    marginBottom: 20,
+    color: '#4C9A70',
+    marginBottom: 40,
   },
   input: {
-    width: 200,
-    height: 40,
-    borderColor: 'black',
+    width: '80%',
+    height: 50,
+    borderColor: '#A8D5BA',
     borderWidth: 1,
-    marginBottom: 10,
-    paddingHorizontal: 10,
+    marginBottom: 20,
+    padding: 10,
+    borderRadius: 25,
+    fontSize: 18,
+    backgroundColor: '#FFFFFF',
+  },
+  buttonContainer: {
+    marginBottom: 20,
+    width: '60%',
+    borderRadius: 25,
   },
   result: {
     fontSize: 40,
     fontWeight: 'bold',
+    color: '#333',
     marginTop: 20,
   },
   resultText: {
     fontSize: 20,
+    color: '#333',
     marginTop: 10,
   },
-  backgroundImage: {
-    flex: 1,
-    width: '100%',
-    height: '100%',
-  },
-  overlay: {
-    flex: 1,
-    backgroundColor: 'rgba(255, 255, 255, 0.6)',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
 });
+
 
 export default BMICalculatorScreen;

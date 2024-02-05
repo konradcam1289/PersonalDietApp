@@ -64,8 +64,8 @@ const AddDish = () => {
     return (
       <View style={styles.cameraContainer}>
         <Camera style={styles.camera} type={Camera.Constants.Type.back} ref={cameraRef} />
-        <View style={styles.button}>
-          <Button title="Zrób Zdjęcie" onPress={takePhoto} />
+        <View style={styles.buttonContainer}>
+          <Button title="Zrób Zdjęcie" onPress={takePhoto} color="#4C9A70" />
         </View>
       </View>
     );
@@ -84,8 +84,8 @@ const AddDish = () => {
         renderCamera()
       ) : (
         <>
-          <View style={styles.button}>
-            <Button title="Otwórz Aparat" onPress={() => setCameraVisible(true)} />
+          <View style={styles.buttonContainer}>
+            <Button title="Otwórz Aparat" onPress={() => setCameraVisible(true)} color="#4C9A70" />
           </View>
           {imageUri && <Image source={{ uri: imageUri }} style={styles.image} />}
           <TextInput
@@ -108,42 +108,56 @@ const AddDish = () => {
             placeholder="Składniki (oddziel przecinkami)"
             multiline
           />
-          <Button title="Dodaj Potrawę" onPress={handleAddDish} />
+          <View style={styles.buttonContainer}>
+            <Button title="Dodaj Potrawę" onPress={handleAddDish} color="#4C9A70" />
+          </View>
         </>
       )}
     </View>
   );
+  
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F0F0F0',
   },
   cameraContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    width: '100%',
   },
   camera: {
     width: '100%',
     height: 300,
+    borderRadius: 15,
   },
   input: {
+    height: 50,
+    width: '90%',
+    marginVertical: 10,
     borderWidth: 1,
-    borderColor: '#cccccc',
-    padding: 10,
-    marginBottom: 20,
-    borderRadius: 5,
+    borderColor: '#A8D5BA',
+    borderRadius: 25,
+    padding: 15,
+    backgroundColor: '#FFFFFF',
+    fontSize: 18,
   },
   image: {
-    width: '100%',
+    width: '90%',
     height: 200,
+    borderRadius: 15,
     marginBottom: 20,
   },
-  button: {
-    margin: 20,
-  }
+  buttonContainer: {
+    width: '90%',
+    marginVertical: 10,
+  },
 });
+
 
 export default AddDish;

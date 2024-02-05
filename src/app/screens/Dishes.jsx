@@ -43,73 +43,76 @@ const Dishes = () => {
   }
 
   return (
-    <ImageBackground source={require('../Image/obraz1.png')} style={styles.backgroundImage}>
-      <View style={styles.overlay}>
-      <View style={styles.container}>
-        <TouchableOpacity onPress={navigateToAddDish} style={styles.addButton}>
-            <Text style={styles.addButtonText}>Dodaj Potrawę</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={navigateToUserDishes} style={styles.addButton}>
-            <Text style={styles.addButtonText}>Dania użytkownika</Text>
-        </TouchableOpacity>
-        <FlatList
-          data={dishes}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => (
-            <TouchableOpacity onPress={() => handleSelectDish(item)} style={styles.item}>
-              <Text style={styles.title}>{item.name}</Text>
-            </TouchableOpacity>
-            
-          )}
-        />
-
-      </View>
-
-      </View>
-    </ImageBackground>
+    <View style={styles.container}>
+      <TouchableOpacity onPress={navigateToAddDish} style={styles.addButton}>
+        <Text style={styles.addButtonText}>Dodaj Potrawę</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={navigateToUserDishes} style={styles.userDishesButton}>
+        <Text style={styles.addButtonText}>Dania użytkownika</Text>
+      </TouchableOpacity>
+      <FlatList
+        data={dishes}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <TouchableOpacity onPress={() => handleSelectDish(item)} style={styles.item}>
+            <Text style={styles.title}>{item.name}</Text>
+          </TouchableOpacity>
+        )}
+      />
+    </View>
   );
+  
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 22,
+    alignItems: 'center',
+    backgroundColor: '#F0F0F0',
   },
   item: {
-    padding: 15,
+    padding: 20,
     borderBottomWidth: 1,
-    borderBottomColor: '#dddddd',
-    backgroundColor: 'rgba(255, 255, 255, 0.8)',
-    marginVertical: 5,
-    marginHorizontal: 10,
-    borderRadius: 10,
-    elevation: 1
+    borderBottomColor: '#A8D5BA',
+    backgroundColor: '#FFFFFF',
+    width: '90%',
+    marginVertical: 8,
+    borderRadius: 20,
+    elevation: 3,
+    shadowColor: '#000',
+    shadowOffset: { width: 1, height: 1 },
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
   },
   title: {
-    fontSize: 22,
+    fontSize: 18,
     fontWeight: 'bold',
-    color: '#333333',
-  },
-  backgroundImage: {
-    flex: 1,
-    resizeMode: 'cover',
+    color: '#4C9A70',
   },
   addButton: {
-    backgroundColor: '#007bff',
-    padding: 10,
-    borderRadius: 5,
+    backgroundColor: '#4C9A70',
+    padding: 15,
+    borderRadius: 20,
     alignSelf: 'center',
     marginVertical: 10,
+    width: '90%',
+    alignItems: 'center',
+  },
+  userDishesButton: {
+    backgroundColor: '#A8D5BA',
+    padding: 15,
+    borderRadius: 20,
+    alignSelf: 'center',
+    marginVertical: 10,
+    width: '90%',
+    alignItems: 'center',
   },
   addButtonText: {
-    color: 'white',
-    fontSize: 16,
+    color: '#FFFFFF',
+    fontSize: 18,
     fontWeight: 'bold',
   },
-  overlay: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(255, 255, 255, 0.4)',
-  }
 });
+
 
 export default Dishes;

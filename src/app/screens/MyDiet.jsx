@@ -53,6 +53,7 @@ const MyDiet = () => {
       </TouchableOpacity>
     </View>
   );
+  
 
   return (
     <View style={styles.container}>
@@ -63,41 +64,53 @@ const MyDiet = () => {
         renderItem={renderItem}
       />
     </View>
-  );
+  );  
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 10,
+    backgroundColor: '#F0F0F0',
+    padding: 20,
   },
   header: {
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: 'bold',
-    marginBottom: 10,
+    color: '#4C9A70',
+    marginBottom: 20,
+    textAlign: 'center',
   },
   mealItem: {
-    backgroundColor: '#f0f0f0',
-    padding: 10,
-    marginVertical: 5,
-    borderRadius: 5,
+    backgroundColor: '#FFFFFF',
+    padding: 20,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    marginVertical: 8,
+    borderRadius: 20,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
   },
   dishName: {
-    fontSize: 16,
-    fontWeight: '500',
+    fontSize: 18,
+    color: '#333',
+    flex: 1,
   },
   deleteButton: {
-    backgroundColor: 'red',
-    padding: 5,
-    borderRadius: 5,
+    backgroundColor: '#D9534F',
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    borderRadius: 20,
   },
   deleteButtonText: {
     color: 'white',
-    fontSize: 14,
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });
+
 
 export default MyDiet;
