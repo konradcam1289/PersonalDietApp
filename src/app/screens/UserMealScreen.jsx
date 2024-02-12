@@ -102,68 +102,88 @@ const UserMealsScreen = () => {
       />
     </View>
   );
+  
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#F0F0F0',
   },
   header: {
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: 'bold',
-    backgroundColor: '#ffffff',
+    backgroundColor: '#FFFFFF',
     padding: 15,
     marginTop: 10,
-    borderRadius: 10,
+    borderRadius: 20,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.2,
-    shadowRadius: 1.41,
-    elevation: 2,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 3,
+    elevation: 4,
+    marginHorizontal: 10,
+    color: '#4C9A70',
   },
   mealItem: {
-    backgroundColor: '#fff',
+    backgroundColor: '#FFFFFF',
     padding: 15,
-    borderBottomWidth: 1,
-    borderBottomColor: '#eee',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    borderBottomWidth: 1,
+    borderBottomColor: '#EEEEEE',
+    marginHorizontal: 10,
+    borderRadius: 10,
   },
   calories: {
-    fontSize: 14,
-    color: '#666',
+    fontSize: 16,
+    color: '#666666',
   },
   sectionFooter: {
-    backgroundColor: '#ffffff',
+    backgroundColor: '#FFFFFF',
     padding: 15,
     marginTop: 5,
-    marginBottom: 10,
-    borderRadius: 10,
+    borderRadius: 20,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.2,
-    shadowRadius: 1.41,
-    elevation: 2,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 3,
+    elevation: 4,
+    marginHorizontal: 10,
+    marginBottom: 10,
   },
   input: {
     height: 40,
-    borderColor: 'gray',
+    borderColor: '#A8D5BA',
     borderWidth: 1,
     marginBottom: 10,
-    padding: 5,
-    borderRadius: 5,
+    padding: 10,
+    borderRadius: 10,
+    color: '#333333',
+    backgroundColor: '#F0F0F0',
   },
   caloriesSummary: {
     fontSize: 16,
     fontWeight: 'bold',
+    color: '#333333',
   },
   status: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#4caf50',
+    color: '#4C9A70',
+  },
+  deleteButton: {
+    backgroundColor: '#D9534F',
+    padding: 10,
+    borderRadius: 20,
+    color: '#FFFFFF',
+  },
+  deleteButtonText: {
+    color: '#FFFFFF',
+    fontSize: 14,
   },
 });
+
 
 export default UserMealsScreen;

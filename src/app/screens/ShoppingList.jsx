@@ -51,6 +51,18 @@ const ShoppingList = () => {
     setEditedText('');
   };
 
+  const startEditItem = (item) => {
+    setEditItem(item.id);
+    setEditedText(item.name);
+  };
+
+  const handleEditItem = () => {
+    const itemToUpdate = items.find(item => item.id === editItem);
+    if (itemToUpdate) {
+      updateItemInFirestore({ ...itemToUpdate, name: editedText });
+    }
+  };
+
   const renderItem = ({ item }) => {
     if (editItem === item.id) {
       return (
@@ -107,16 +119,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 50,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#F0F0F0',
   },
   input: {
     width: '80%',
-    borderColor: '#333',
+    borderColor: '#A8D5BA',
     borderWidth: 1,
     padding: 10,
     marginVertical: 10,
     color: '#333',
     alignSelf: 'center',
+    borderRadius: 25,
+    backgroundColor: '#FFFFFF',
   },
   item: {
     flexDirection: 'row',
@@ -124,9 +138,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     padding: 10,
     marginVertical: 5,
-    backgroundColor: '#e1e1e1',
-    borderRadius: 5,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 20,
     marginHorizontal: 20,
+    elevation: 3,
   },
   itemText: {
     color: '#333',
@@ -139,7 +154,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   button: {
-    backgroundColor: '#4c669f',
+    backgroundColor: '#4C9A70',
     padding: 5,
     marginHorizontal: 5,
     borderRadius: 5,
@@ -148,10 +163,12 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
   addButton: {
-    backgroundColor: '#4c669f',
+    backgroundColor: '#4C9A70',
     padding: 10,
-    borderRadius: 5,
+    borderRadius: 20,
     alignSelf: 'center',
+    width: '50%',
+    alignItems: 'center',
   },
 });
 
