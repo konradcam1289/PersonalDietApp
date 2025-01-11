@@ -10,7 +10,6 @@ const DishSelector = () => {
   const route = useRoute();
   const selectedDay = route.params ? route.params.selectedDate : null;
   const navigation = useNavigation();
-
   useEffect(() => {
     const fetchDishes = async () => {
       try {
